@@ -88,7 +88,7 @@ class CuneiPy:
         self.n = None
         self.predictions = pd.DataFrame()
 
-    def fit(self, _df, input, target, n):
+    def fit(self, df, input, target, n):
         '''
         Fits the model; i.e. calculates probability matrices with ngrams of length n for each language.
         Parameters:
@@ -98,12 +98,12 @@ class CuneiPy:
             such as "SUX" for Sumerian, "LTB" for Late Babylonian, etc.
         :n: Integer. Length of n-grams.
         '''
-        self.languages = list(set(_df[target]))
-        self.train_data = _df
+        self.languages = list(set(df[target]))
+        self.train_data = df
         self.n = n
 
         # Preprocess training data
-        self.train_data['cuneiform_mod'] = preprocess(_df[input])
+        self.train_data['cuneiform_mod'] = preprocess(df[input])
 
         # Split dataframes by language
         for lang in self.languages:
